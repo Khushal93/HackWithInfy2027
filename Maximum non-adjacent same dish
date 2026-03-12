@@ -1,0 +1,43 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include<unordered_map>
+#include<climits>
+#include<vector>
+using namespace std;
+int main() {
+ 
+ int arr[9] = {4,4,2,4,2,4,2,4,2};
+ int n=9;
+ unordered_map<int,vector<int>>mp;
+ for(int i=0;i<n;i++)
+ {
+     mp[arr[i]].push_back(i);
+ }
+ int max_count=0;
+ int anstype= INT_MAX;
+ for(auto it:mp)
+ {
+     int type = it.first;
+     vector<int>pos = it.second;
+     
+     int cnt=0;
+     int prev=-2;
+     for(int idx:pos)
+     {
+         if(cnt-prev > 1)
+         {
+             cnt++;
+             prev=idx;
+         }
+     }
+     if(cnt>max_count || (cnt==max_count && type<anstype))
+     {
+         max_count = cnt;
+         anstype = type;
+     }
+ }
+ cout<<anstype;
+    
+
+    return 0;
+}
